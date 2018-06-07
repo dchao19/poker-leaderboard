@@ -1,0 +1,21 @@
+body {
+	margin: 0;
+	padding: 15px 0 0 0;
+	font-family: sans-serif;
+	display: flex;
+	justify-content: center;
+}
+
+.main-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.add-button {
+	margin-bottom: 15px;
+}
+
+.dismissAlertButton:hover {
+	cursor: pointer;
+}
