@@ -49,7 +49,9 @@ router.delete("/delete", async (req, res) => {
 			});
 		}
 
-		res.status(204).send();
+		res.send({
+			success: true
+		});
 	} catch (e) {
 		res.status(500).send({
 			success: false,
