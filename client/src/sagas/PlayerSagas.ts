@@ -34,8 +34,6 @@ function* getPlayers(action: IAction<{}>) {
 			yield put(playerActions.client_addPlayer(player));
 		}
 	} catch (e) {
-		// tslint:disable-next-line:no-console
-		console.log(e);
 		yield put(errorActions.showError(e.message));
 	}
 
@@ -43,13 +41,20 @@ function* getPlayers(action: IAction<{}>) {
 }
 
 function* deletePlayer(action: IAction<{ playerId: string }>) {
-	if (action.payload) {
-		yield put(playerActions.setRowLoading(action.payload.playerId));
-
-		yield call(apiActions.deletePlayer, action.payload.playerId);
-		yield put(playerActions.setRowLoadingDone());
-		yield put(playerActions.client_deletePlayer(action.payload.playerId));
+	if (!action.payload) {
+		return;
 	}
+
+	yield put(playerActions.setRowLoading(action.payload.playerId));
+
+	try {
+		yield call(apiActions.deletePlayer, action.payload.playerId);
+		yield put(playerActions.client_deletePlayer(action.payload.playerId));
+	} catch (e) {
+		yield put(errorActions.showError(e.message));
+	}
+
+	yield put(playerActions.setRowLoadingDone());
 }
 
 function* updatePlayer(
@@ -61,13 +66,18 @@ function* updatePlayer(
 		};
 	}>
 ) {
-	if (action.payload) {
-		yield put(
-			playerActions.setUpdatePlayerLoading(
-				action.payload.id,
-				action.payload.updatedFields.fieldName
-			)
-		);
+	if (!action.payload) {
+		return;
+	}
+
+	yield put(
+		playerActions.setUpdatePlayerLoading(
+			action.payload.id,
+			action.payload.updatedFields.fieldName
+		)
+	);
+
+	try {
 		const newPlayer = yield call(
 			apiActions.updatePlayer,
 			action.payload.id,
@@ -76,8 +86,11 @@ function* updatePlayer(
 
 		yield put(playerActions.client_deletePlayer(action.payload.id));
 		yield put(playerActions.client_addPlayer(newPlayer));
-		yield put(playerActions.setUpdatePlayerDoneLoading());
+	} catch (e) {
+		yield put(errorActions.showError(e.message));
 	}
+
+	yield put(playerActions.setUpdatePlayerDoneLoading());
 }
 
 export const playerSagas = [

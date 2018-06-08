@@ -33,9 +33,6 @@ export async function addPlayer(newPlayer: IPlayer): Promise<IPlayer> {
 
 export async function deletePlayer(playerId: string): Promise<void> {
 	const request = await fetch(`${apiUrls.DELETE_PLAYER}?playerId=${playerId}`, {
-		headers: {
-			"Content-Type": "application/json"
-		},
 		method: "DELETE"
 	});
 
