@@ -1,6 +1,6 @@
 # Poker Leaderboard
 
-![screenshot](https://i.imgur.com/pNmyh2O.png)
+![screenshot](https://i.imgur.com/Y2pJM2k.gif)
 
 ## Building and Running the Client
 
