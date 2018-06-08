@@ -11,7 +11,7 @@
 - Redux, React-Redux, Redux-Saga, and Redux-Logger
 - React-bootstrap
 
-The client was bootstrapped with create-react-app and has not been ejected. As such, all create-react-app commands are still valid in the `client` directory of the main repository. To start a local dev server, first install its dependencies: `yarn install` and then use the command `yarn start`. The frontend relies on the backend information supplied in `client/src/api/apiUrls`.
+The client was bootstrapped with create-react-app and has not been ejected. As such, all create-react-app commands are still valid in the `client` directory of the main repository. To start a local dev server, change to the `client` directory and first install its dependencies: `yarn install` and then use the command `yarn start`. The frontend relies on the backend information supplied in `client/src/api/apiUrls`.
 
 To build the project for production: use `yarn build`. Build artifacts are located in client/build.
 
